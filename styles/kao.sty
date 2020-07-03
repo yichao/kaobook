@@ -648,14 +648,9 @@
 
 \ifxetexorluatex
 	% May require the user to run `tlmgr install tex-gyre'
-	\RequirePackage{fontspec}
-	\RequirePackage{newpxmath} % maths fonts
-	\setromanfont[
-		BoldFont = texgyrepagella-bold.otf,
-		ItalicFont = texgyrepagella-italic.otf,
-		BoldItalicFont = texgyrepagella-bolditalic.otf,
-		Scale=.97
-	]{texgyrepagella-regular.otf}
+	\RequirePackage{unicode-math}
+	%\RequirePackage{newpxmath} % maths fonts
+	\setromanfont{Libertinus Serif}
 	\setsansfont[
 		Scale=.92
 	]{Nimbus Sans}
