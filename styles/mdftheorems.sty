@@ -28,7 +28,16 @@
 \RequirePackage[framemethod=TikZ]{mdframed}
 
 % Define the default colors
-\newcommand{\@background}{Goldenrod!45!white}
+\definecolor{FlatRed}{RGB}{231,76,60}
+\definecolor{FlatGreen}{RGB}{46,204,113}
+\definecolor{FlatBlue}{RGB}{52,152,219}
+\definecolor{FlatYellow}{RGB}{241,196,15}
+\colorlet{FlatViolet}{FlatRed!50!FlatBlue}
+\colorlet{FlatBrown}{FlatRed!50!FlatGreen}
+\colorlet{FlatOrange}{FlatRed!50!FlatYellow}
+\colorlet{FlatCyan}{FlatGreen!50!FlatBlue}
+
+\newcommand{\@background}{FlatYellow!50!White}
 \newcommand{\@theorembackground}{\@background}
 \newcommand{\@propositionbackground}{\@background}
 \newcommand{\@lemmabackground}{\@background}
@@ -37,6 +46,7 @@
 \newcommand{\@assumptionbackground}{\@background}
 \newcommand{\@remarkbackground}{\@background}
 \newcommand{\@examplebackground}{\@background}
+\newcommand{\@axiombackground}{\@background}
 
 % Declare the options to change the colors
 \DeclareOptionX{background}{%
@@ -66,6 +76,9 @@
 \DeclareOptionX{examplebackground}{%
 	\renewcommand{\@examplebackground}{#1}%
 }
+\DeclareOptionX{axiombackground}{%
+	\renewcommand{\@axiombackground}{#1}%
+}
 \DeclareOption*{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 
 % Process the options
@@ -80,7 +93,7 @@
 	rightmargin=0pt,
 	leftmargin=0pt,
 	innertopmargin=7pt,
-	innerbottommargin=3pt,
+	innerbottommargin=7pt,
 	innerrightmargin=5pt,
 	innerleftmargin=5pt,
 	topline=false,
@@ -213,6 +226,18 @@
 		%frametitlebackgroundcolor=\@theorembackground,
 	},
 ]{corollary}
+\declaretheorem[
+	name=Axiom,
+	%refname={corollary,corollaries},
+	refname={Axiom,Axioms},
+	Refname={Axiom,Axioms},
+	sibling=theorem,
+	mdframed={
+		style=mdfkao,
+		backgroundcolor=\@axiombackground,
+		%frametitlebackgroundcolor=\@theorembackground,
+	},
+]{axiom}
 
 \theoremstyle{kaodefinition}
 \declaretheorem[

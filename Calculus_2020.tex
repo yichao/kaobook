@@ -67,6 +67,10 @@
 
 %----------------------------------------------------------------------------------------
 
+\newtheorem{exer}{Exercice}[chapter]
+
+%----------------------------------------------------------------------------------------
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -77,7 +81,7 @@
 % \subject{Subject}
 
 \title[Calculus Ia]{Calculus Ia: Limits and differentiation}
-% \subtitle{Subtitle}
+\subtitle{(\href{https://studies.helsinki.fi/courses/cur/hy-opt-cur-2021-b69846ac-e17d-4aa1-9c38-68535225cd83}{BSMA1002})}
 
 \author[Yichao]{Yichao Huang}
 
@@ -209,7 +213,7 @@ P.S. Although this note can be publicly distributed and reused, it is not my int
 
 \tableofcontents % Output the table of contents
 
-\listoffigures % Output the list of figures
+% \listoffigures % Output the list of figures
 
 % Comment both of the following lines to have the LOF and the LOT on different pages
 \let\cleardoublepage\bigskip
@@ -241,7 +245,7 @@ Some symbols are specific to mathematics, such as
 \begin{equation*}
 \begin{split}
 \forall&\quad \text{for all}\\
-\exists&\quad \text{there exist(s)}\\
+\exists&\quad \text{there exist(s)~[\dots]~(such that)}\\
 \lor&\quad \text{or}\\
 \land&\quad \text{and}\\
 \infty&\quad \text{infinity}
@@ -271,7 +275,14 @@ What does it mean? How do one write it in plain language?
 
 (Before moving on, one could first to come up with a personal attempt. The goal is not to succeed at the first try, but to, \emph{inter alia}, figure out some patterns and be aware of the possible difficulties.)
 
-The general rule for negating a statement is the following: (tbc).\sidenote{Don't try to remember these sentences, but rather, do some examples and \textbf{understand the principle behind it}.}
+The general rule for negating a statement is the following: for any statements $P$ and $Q$,\sidenote{Don't try to remember these sentences, but rather, do some examples and \textbf{understand the principle behind it}.}
+\begin{enumerate}
+	\item $\neg (P\lor Q)$\quad\text{is}\quad$\neg P\land\neg Q$;
+	\item $\neg (P\land Q)$\quad\text{is}\quad$\neg P\lor\neg Q$;
+	\item $\neg (\forall x, P)$\quad\text{is}\quad$\exists x, \neg P$;
+	\item $\neg (\exists x, P)$\quad\text{is}\quad$\forall x, \neg P$.
+\end{enumerate}
+(Say these phrases with a less obscure language!)
 
 For the example above, an equivalent way of writing the statement
 \begin{equation*}
@@ -300,9 +311,23 @@ P\Rightarrow Q
 \end{equation*}
 means ``If $P$ is true, then $Q$ is true''. It does not give information on $Q$ if $P$ is false.
 
-One can draw a \textbf{truth table} to understand better the symbol $\Rightarrow$. In the table, $1$ means ``true'' and $0$ means ``false'', and I leave you to figure out the rest.
+One can draw a \textbf{truth table} to understand better the symbol $\Rightarrow$. In the table, $1$ means ``true'' and $0$ means ``false'', and I leave you to figure out the rest.\sidenote{Or one writes simple $T$ and $F$ for ``true'' and ``false''. In real life, you will probably soon forget about this table.}
 
-(tbc)
+\begin{center}
+\begin{tabular}{| c | c | c |}
+\hline
+P & Q & P\Rightarrow Q \\
+\hline
+1 & 1 & 1 \\ 
+\hline
+1 & 0 & 0 \\
+\hline
+0 & 1 & 1 \\
+\hline
+0 & 0 & 1 \\
+\hline
+\end{tabular}
+\end{center}
 
 It is quite useful to realize that the implication symbol can be replaced by other symbols before. At first sight this mights seem strange, but let us draw the table of truth for
 \begin{equation*}
@@ -310,20 +335,45 @@ It is quite useful to realize that the implication symbol can be replaced by oth
 \end{equation*}
 and compare it to the table before:
 
-(tbc)
+\begin{center}
+\begin{tabular}{| c | c | c | c |}
+\hline
+P & Q & \neg P & (\neg P) \lor Q \\
+\hline
+1 & 1 & 0 & 1 \\ 
+\hline
+1 & 0 & 0 & 0 \\
+\hline
+0 & 1 & 1 & 1 \\
+\hline
+0 & 0 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
 
-\textbf{Equivalence} of two statements $P$ and $Q$, with the symbol
+\begin{proposition}
+The statement
+\begin{equation*}
+P\Rightarrow Q
+\end{equation*}
+is equivalent to
+\begin{equation*}
+(\neg P) \lor Q.
+\end{equation*}
+\end{proposition}
+
+The \textbf{equivalence} of two statements $P$ and $Q$, with the symbol
 \begin{equation*}
 P\equiv Q
 \end{equation*}
 should be understood as two implications:
 \begin{equation*}
-P\Rightarrow Q\quad\text{and} Q\Rightarrow P.
+P\Rightarrow Q\quad\text{and}\quad Q\Rightarrow P.
 \end{equation*}
 It simply says that they are either both true or both false.\sidenote{Try to draw the truth table (on a paper, on an electronic device or in your head)!}
 
 \begin{proposition}
-The following statements are equivalent:\sidenote{Personal dedication to my undergrad teacher Mr. Mohan: ``LASSE'' (Les assertions suivantes sont équivalentes).}
+The following statements are equivalent:\footnote{Personal dedication to my undergrad teacher Mr. Mohan: ``LASSE'' (Les assertions suivantes sont équivalentes).}
 \begin{enumerate}
 	\item \begin{equation*}P\Rightarrow Q.\end{equation*}
 	\item \begin{equation*}(\neg P) \lor Q.\end{equation*}
@@ -339,7 +389,21 @@ The following statements are equivalent:\sidenote{So, what does ``$((\neg P) \lo
 It is a little self-referencing if you take it as the definition of equivalence!
 \end{proposition}
 
-\textbf{Proof by contradiction} is also commonly used in mathematics (and in everyday life).\sidenote{Proof by contradiction is formulated as $P\equiv P\lor \bot\equiv \neg(\neg P)\lor \bot\equiv \neg P\to\bot$, where $\bot$ is a logical contradiction or a false statement (a statement which true value is false). If $\bot$ is reached via $\neg P$ via a valid logic, then $\neg P\to \bot$ is proved as true so $P$ is proved as true. I didn't bother to read the above phrases myself (I copied it from \href{https://en.wikipedia.org/wiki/Proof_by_contradiction}{Wikipedia}), since in practice, one should seize the \textbf{idea} (which I think you all have it naturally) rather than relying on formal manipulation of symbols. It is up to you to find out what is the best way to understand a new concept!} The principle can be summarized as the following: (tbc)
+\textbf{Proof by contradiction} is also commonly used in mathematics (and in everyday life).\sidenote{Proof by contradiction is formulated as $P\equiv P\lor \bot\equiv \neg(\neg P)\lor \bot\equiv \neg P\to\bot$, where $\bot$ is a logical contradiction or a false statement (a statement which true value is false). If $\bot$ is reached via $\neg P$ via a valid logic, then $\neg P\to \bot$ is proved as true so $P$ is proved as true. I didn't bother to read the above phrases myself (I copied it from \href{https://en.wikipedia.org/wiki/Proof_by_contradiction}{Wikipedia}), since in practice, one should seize the \textbf{idea} (which I think you all have it naturally) rather than relying on formal manipulation of symbols. It is up to you to find out what is the best way to understand a new concept!} In practice, this often means the following steps:
+\begin{enumerate}
+	\item Suppose the negation of what you are proving is true;
+	\item Use this information to deduce something that is known to be false;
+	\item Therefore, you have a contradiction (since ``true'' cannot imply ``false''), and the original statement must be true.\sidenote{To be annoyingly precise, here we are assuming a basic axiom of logic called the law of noncontradiction.}
+\end{enumerate}
+
+\begin{example}
+There is no smallest strictly positive real number.
+\begin{proof}
+Suppose the opposite and let $r>0$ be the smallest strictly positive real number. But $r/2$ is a real number, $r/2$ is strictly smaller than $r$ and $r/2$ is strictly positive. We have found a strictly positive real number smaller than $r$: contradiction.
+\end{proof}
+\end{example}
+
+The above proof is very concise. In the beginning, you probably want to write a more detailed proof to make sure that it is correct and understandable. Now, as an exercise, can you write down the statement in the example with logical symbols? How would you write down its negation? What are we doing in the above proof?\sidenote{To be honest, I don't know the answer to these questions even though I wrote down the proof above: this is only because I have gathered enough experience, and interpreted subconsciously the principle in my own way.}
 
 \begin{figure}[h]
   \includegraphics{Principia_Mathematica.png}
@@ -356,29 +420,306 @@ One of the advantages of mathematics compared to other science, is that (almost)
 \section{Mathematical induction}
 One of the early difficulties of transitioning into a good undergrad student is to write mathematical sound and concise proofs. We have already seen what is proof by contradiction; let us review another classical proof technique: \textbf{proof by induction}.
 
-Here is a learning technique: you can \textbf{start by an example before reading the theoretical descriptions}. So let us search ``proof by induction'' on the internet, go to the Wikipedia page, and check out the following example:
+Here is a learning technique: you can \textbf{start by an example before reading the theoretical descriptions}. So let us search ``proof by induction'' on the internet, go to \href{https://en.wikipedia.org/wiki/Mathematical_induction}{the Wikipedia page}, and check out the following example:
 
 \begin{example}[Sum of consecutive natural numbers]
-\dots
+For any integer $n\geq 0$, we have
+\begin{equation*}
+0+1+2+\dots+n=\frac{n(n+1)}{2}.
+\end{equation*}
 \end{example}
+
+One can rewrite the sum using the symbol $\sum$:\sidenote{The index $i$ is called the dummy index; you can replace it with other symbols such as $j$ or $k$ and it only governs what happens inside the summation symbol.}
+\begin{equation*}
+\sum\limits_{i=0}^{n}i=0+1+2+\dots+n.
+\end{equation*}
+
+A longer proof is the following. Rigorously speaking, the proof starts by defining a statement $P(n)$ for each interger $n\geq 0$:
+\begin{equation*}
+P(n):\quad 0+1+2+\dots+n=\frac{n(n+1)}{2}.
+\end{equation*}
+For now we don't know if for a given interger $n$, $P(n)$ is true or not.
+
+We then start by checking the \textbf{base case} (or ``initialization''): in our case, that $P(0)$ is true. Notice that $n=0$ is the smallest case possible. This is verified usually directly, i.e. by checking that
+\begin{equation*}
+0=\frac{0\cdot 1}{2}.
+\end{equation*}
+
+Then the ``inductive step'' consists of checking the implication
+\begin{equation*}
+P(n)\Rightarrow P(n+1)
+\end{equation*}
+for all $n$ greater or equal to the base case, in our case, $n\geq 0$. This means that we suppose $P(n)$ is true (this is called ``induction hypothesis'') for some $n\geq 0$ and from this, we show deduce that $P(n+1)$ is also true. So we suppose that $P(n)$ is true, i.e. we know that
+\begin{equation*}
+0+1+2+\dots+n=\frac{n(n+1)}{2}
+\end{equation*}
+and we want to prove that $P(n+1)$ is true, i.e.
+\begin{equation*}
+0+1+2+\dots+n+(n+1)=\frac{(n+1)(n+2)}{2}.
+\end{equation*}
+This follows by observing that
+\begin{align*}
+&0+1+2+\dots+n+(n+1)\\
+=&{}(0+1+2+\dots+n)+(n+1)\\
+=&{}\frac{n(n+1)}{2}+(n+1)\tag*{(induction hypothesis)}\\
+=&{}\frac{n^2+n+(2n+2)}{2}\\
+=&{}\frac{(n+1)(n+2)}{2}.
+\end{align*}
+In the above chain of equations, we have hightlighted the one where we used the assumption that $P(n)$ is true.
+
+The conclusion is that, once we have checked the base case $0$ and the implication $P(n)\Rightarrow P(n+1)$ for all $n\geq 0$, we get that $P(1)$ is true (since $P(0)$ is true and $P(0)\Rightarrow P(1)$); and then $P(2)$ is true (since now $P(1)$ is true and $P(1)\Rightarrow P(2)$); \dots; and that $P(n)$ is true for every $n\geq 0$. This argument is the principle of the mathematical induction.
+
+Now in practice, the following (writing of) proof is enough:
+\begin{proof}
+(tbc)
+\end{proof}
+
+\section{Exercices}
+\begin{exer}
+Let $x,y\in\mathbb{R}$.
+\begin{enumerate}
+	\item Write the negation of the phrase ``$x$ and $y$ are both smaller than $1$''.
+	\item Write the above phrase in set language.
+	\item Write the complement of the above set.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Let $x,y\in\mathbb{R}$. Show that
+\begin{equation*}
+|x+y|\leq |x|+|y|,
+\end{equation*}
+then
+\begin{equation*}
+|x-y|\geq \left||x|-|y|\right|.
+\end{equation*}
+Give an interpretation of these inequalities by remembering that $|x-y|$ measures the \textbf{distance} between $x$ and $y$.
+\end{exer}
+
+\begin{exer}
+Show that the negation of
+\begin{equation*}
+P\Rightarrow Q
+\end{equation*}
+is
+\begin{equation*}
+P\land(\neg Q).
+\end{equation*}
+Translate this exercice into human language.
+\end{exer}
+
+\begin{exer}
+Write the negation of the statement:
+\begin{equation*}
+\text{(P)}:\quad \forall \epsilon>0, \exists \delta>0, (|x-y|\leq \delta) \Rightarrow (\left||x|-|y|\right|\leq \epsilon).
+\end{equation*}
+Use the exercise above to determine if the statement $P$ is true or false.\sidenote{Then, when you have time, take a (coffee) break and contemplate for a few minutes: what is this statement? You don't need to have a precise idea, but it is healthy to think about it.}
+\end{exer}
+
+\begin{exer}
+Let $x,y\in\mathbb{R}$. Show that
+\begin{equation*}
+\max(x,y)=\frac{x+y}{2}+\frac{|x-y|}{2}.
+\end{equation*}
+Write a similar formula for $\min(x,y)$.
+\end{exer}
+
+\begin{exer}
+Let $0<q<1$. Show by induction that
+\begin{equation*}
+\sum\limits_{k=0}^{n}q^k=1+q+q^2+\dots+q^{n}=\frac{1-q^{n+1}}{1-q}.
+\end{equation*}
+
+As an application, show that with the complex number $i$,\sidenote{This is the Dirichlet kernel.}
+\begin{equation*}
+\sum\limits_{k=-n}^{n}e^{ikt}=\frac{\sin\left(\frac{2n+1}{2}t\right)}{\sin\left(\frac{1}{2}t\right)}.
+\end{equation*}
+\end{exer}
+
+\begin{exer}
+Let $n>0$ be a positive integer. Show by induction that
+\begin{equation*}\sum\limits_{k=0}^{n}k^2=\frac{n(n+1)(2n+1)}{6}.\end{equation*}
+\end{exer}
+
+\begin{exer}[$\ast$]
+Show that for all integer $n\geq 4$,\sidenote{In 2021, you will learn to prove that\begin{equation*}\sqrt{2\pi}n^{n+\frac{1}{2}}e^{-n}\leq n!\leq en^{n+\frac{1}{2}}e^{-n}.\end{equation*}}
+\begin{equation*}
+2^{n}<n!<n^{n}.
+\end{equation*}
+\end{exer}
+
+\begin{exer}[$\ast$]
+Prove that $\sqrt{2}$ is an irrational number.\sidenote{Don't hesitate to use a ``\href{http://www.google.com}{canonical search engine}'' if you don't know what ``irrational number'' means.}
+
+Hint: you can start by supposing that $\sqrt{2}=\frac{p}{q}$ with $p,q$ positive integers and try to deduce a contradiction, by studying the parity of $p$ and of $q$.
+\end{exer}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \pagelayout{wide} % No margins
 \addpart{[Week I]\\What are\dots sets?}
 \pagelayout{margin} % Restore margins
 
 \chapter{Sets: definitions and properties}
+A \textbf{set} is a \emph{well-defined} \underline{collection} of \texttt{distinct} \textsc{objects}.
 
-\section{Sets, elements, subsets}
+What does that mean?
 
-\section{Union, intersection, cardinality}
-
-\section{Finite sets and a taste of combinatorics}
-
-\section{Story time: some paradoxes}
+\section{The naïve definition of sets}
+The naïve set theory starts with a list of \textbf{axioms}.\sidenote{An axiom is a statement taken to be true; although you have to freedom to challenge it (and sometimes hugely rewarding), by doing so you are basically isolating yourself from the majority of the scientific community.}
 
 (tbc)
 
+\section{Union, intersection, cardinality}
+We can perform (binary) \textbf{operations} on sets. Some of the most usual ones include:
+\begin{enumerate}
+	\item
+	\item
+	\item
+\end{enumerate}
+
+Let $A,B$ be two sets. We also define the \textbf{Cartesian\sidenote{René Descartes, one of the founders of modern philosophy. \begin{axiom}[Descartes]I think.\end{axiom}\begin{corollary}[Descartes]I am.\end{corollary}} product} $A\times B$ in the following way:
+\begin{equation*}
+A\times B=\{(a,b);a\in A, b\in B\}.
+\end{equation*}
+
+The \textbf{cardinal} of a set $A$ is the number of its elements. It is denoted by $|A|$ or $\text{Card}(A)$, and can be finite or infinite. For example, the cardinal of $\mathbb{Z}$, denoted $|\mathbb{Z}|$, is infinite.
+
+(tbc: $\mathcal{P}(E)$)
+
+\section{Finite sets and a taste of combinatorics}
+When a set is of finite cardinal, it is called \textbf{finite sets}. Finite sets are stable under the above binary operations (meaning that operating on finite sets return a finite set), and one can be interested in \textbf{counting} the number of elements of a set. The theory of combinatorics is devoted to this end. Below is an important observation:
+\begin{theorem}[Inclusion-exclusion principle]
+(tbc)
+\end{theorem}
+
+\section{Story time: some paradoxes}
+The naïve set theory above leads to many famous paradoxes.
+
+(tbc)
+
+One of the efforts in trying to construct a set theory free of paradoxes is called the \textbf{Zermelo–Fraenkel set theory} or $\textbf{ZFC}$.\sidenote{The ``\textbf{C}'' stands for ``choice'' or ``axiom of choice''. It is a famous axiom which has many consequences: people use it in mathematics all the time without even realizing it. One of the easy understanding version is probably ``The Axiom of Choice is necessary to select a set from an infinite number of pairs of socks, but not an infinite number of pairs of shoes.'' by Bertrand Russell.} However, \textbf{Gödel's second incompleteness theorem} shows that one cannot verify the consistency of ZFC within ZFC itself, and they are explicit examples of statement independent of ZFC (meaning they can neither be proven true or false by ZFC).\sidenote{One of them is the ``continuum hypothesis'', which says that ``There is no set whose cardinality is strictly between that of the integers and the real numbers.''}
+
 For a more elaborated logic paradox of the same flavor, check out the poem on the door of Åsa Hirvonen (last retrieved: August 2020).
+
+\section{Exercices}
+\begin{exer}
+Define the \textbf{symmetric difference} of two sets $A$ and $B$ as:
+\begin{equation*}
+A\bigtriangleup B=(A\setminus B)\cup(B\setminus A).
+\end{equation*}
+\begin{enumerate}
+	\item Calculate
+	\begin{equation*}
+	\{1,2,3\}\bigtriangleup \{3,4\}.
+	\end{equation*}
+	\item Prove that
+	\begin{equation*}
+	A\bigtriangleup B=(A\cup B)\setminus(A\cup B).
+	\end{equation*}
+	\item Sometimes we call the symmetric difference the \textbf{disjunctive union}. Do you have an explanation?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+The following questions are related.
+\begin{enumerate}
+	\item Write down all subsets of the set
+	\begin{equation*}
+	\{1,2,3\}.
+	\end{equation*}
+	How many subsets do you get?
+	\item Prove the formula:
+	\begin{equation*}
+	2^{3}=\begin{pmatrix}3\\0\end{pmatrix}+\begin{pmatrix}3\\1\end{pmatrix}+\begin{pmatrix}3\\2\end{pmatrix}+\begin{pmatrix}3\\3\end{pmatrix}.
+	\end{equation*}
+\end{enumerate}
+Can you generalize the last result?
+\end{exer}
+
+\begin{exer}
+Determine the cardinal of the following sets:
+\begin{equation*}
+S_1=\emptyset,\quad S_2=\{S_1,\{S_1\}\},\quad S_3=\{S_2,\{S_2\}\}, \dots
+\end{equation*}
+You can start by writing down explicit the first cases, e.g. $S_2=\{\emptyset,\{\emptyset\}\}$, make a conjecture, and write a formal proof using mathematical induction.\sidenote{This is an easy exercise, but the natural numbers are defined \href{https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers}{in some system} as the sets $S_1$, $S_2$, $S_3$ etc.}
+\end{exer}
+
+\begin{exer}[$\ast$]
+Let $E$ be a finite set with $n$ elements. Consider the set
+\begin{equation*}
+\mathcal{E}=\left\{A,B\in\mathcal{P}(E); A\cup B=E\right\}.
+\end{equation*}
+What is the cardinal of $\mathcal{E}$?
+\end{exer}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \chapter{Infimum and supremum}
 ``In mathematics, a small positive infinitesimal quantity, usually denoted $\epsilon$, whose limit is usually taken as $\epsilon\to 0$.''
@@ -393,27 +734,122 @@ All symbols are created equal, but some symbols are more equal than others. You 
 \dots
 
 \section{An epsilon of room}
+This is an important moment of your life: you are going to see the use of $\epsilon$ in mathematical analysis.
+
+\begin{theorem}
+Let $A$ be a subset of $\mathbb{R}$ such that $\inf(A)$ exists. Then $p=\inf(A)$ if and only if
+\begin{enumerate}
+	\item For every $x\in A$, $x\geq p$;
+	\item For every $\epsilon>0$, there exists some $x\in A$ with $x>p-\epsilon$.
+\end{enumerate}
+\end{theorem}
+
+\section{Real intervals}
 
 \section{Development: the Archimedean property}
 
+\section{Exercices}
+\begin{exer}
+True or false:\sidenote{As a good habit: always check if a set is empty. The statement ``for all $x\in\emptyset$, $P$'' is always true whatever the statement $P$ is.}
+\begin{enumerate}
+	\item For a finite, non-empty set $A$, $\sup(A)=\max(A)$.
+	\item For any set $A$, $\sup(A)=-\inf(A)$.
+	\item For any non-empty set $A$, $\inf(A)\leq \sup(A)$.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Determine the following quantities:
+\begin{enumerate}
+	\item \begin{equation*}\inf\left\{x\in\mathbb{R};\quad x^2>2\right\}.\end{equation*}
+	\item For $-1<q<1$,\begin{equation*}\sup\left\{n\in\mathbb{Z}_{\geq 0};\quad \sum\limits_{k=0}^{n}q^k\right\}.\end{equation*} Be careful that $q$ can be negative in this question.\sidenote{You can use an exercise from past weeks\dots!}
+	\item \begin{equation*}\inf\left\{x^2-3x+2;\quad -1<x\leq 2\right\}.\end{equation*}
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Let $A=\left([0,\pi)\cap[2,4]\right)\cup(\sqrt{2},\sqrt{10})$.
+\begin{enumerate}
+	\item Determine $\inf(A)$ and $\sup(A)$.
+	\item Is $A$ an interval of $\mathbb{R}$?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Reproof all the results in this chapter using the $\epsilon$ formalism.
+\end{exer}
+
+\begin{exer}
+Let $A=\left\{\frac{n}{n+1}\right\}_{n\in\mathbb{Z}_{\geq 1}}$.\sidenote{It means that $A=\left\{\frac{1}{2},\frac{2}{3},\frac{3}{4},\dots\right\}$.}
+\begin{enumerate}
+	\item Find the infimum and the supremum of $A$.
+	\item Let $\epsilon>0$. Pick an element $a$ of $A$ such that $\sup(A)-a\leq \epsilon$.
+\end{enumerate}
+Notice that the element $a$ \textbf{depends} on the choice of $\epsilon$.\sidenote{If one wants to be very rigorous, one can write $a_{\epsilon}$ or $a(\epsilon)$ instead. The statement ``$\forall \epsilon, \exists a, \dots$'' implicitly implies that $a$ depends on $\epsilon$.}
+\end{exer}
+
+\begin{exer}[$\ast$]
+Let $A,B$ be subsets of $\mathbb{R}$ and suppose that $\sup(A)=M_A\in\mathbb{R}$ and $\sup(B)=M_B\in\mathbb{R}$.
+\begin{enumerate}
+	\item What can we say about $\sup(A+B)$?
+	\item What can we say about $\sup(A-B)$?
+	\item What can we say about $\sup(A-A)$?
+\end{enumerate}
+Here, $A+B$ (resp. $A-B$) are subsets of $\mathbb{R}$ defined as
+\begin{equation*}
+A+B=\{a+b;\quad a\in A, b\in B\},
+\end{equation*}
+and respectively
+\begin{equation*}
+A-B=\{a-b;\quad a\in A, b\in B\}.
+\end{equation*}
+\end{exer}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \pagelayout{wide} % No margins
-\addpart{[Week II]\\What are\dots sequences?}
-\pagelayout{margin} % Restore margins
-
-\chapter{Sequences: definitions and properties}
-
-\section{Classical sequences}
-
-\section{Limit of a sequence}
-
-\section{Squeeze theorem}
-
-\section{Indeterminate forms}
-
-\section{Development: Bolzano-Weierstrass theorem}
-
-\pagelayout{wide} % No margins
-\addpart{[Week III\&IV]\\What are\dots functions?}
+\addpart{[Week II\&III]\\What are\dots functions?}
 \pagelayout{margin} % Restore margins
 
 \chapter{Functions: definitions and properties}
@@ -422,13 +858,13 @@ In high school, most functions are given in the form of a formula:
 y=f(x)=x^{2}+1.
 \end{equation*}
 
-However, in full generality, a function is defined in a more abstract way. The essential idea is to associate an element to a given element (in the example above, for each real number $x$, we associate the real number $y=x^2+1$). The abstract definition has many advantages and covers more situations, for example, we will see that a sequence can be seen as a function (from a set of integers $\mathbb{Z}_{n\geq 0}$ to the set of real numbers $\mathbb{R}$).
+However, in full generality, a function is defined in a more abstract way. The essential idea is the \textbf{association} of an element to a given element (in the example above, for each real number $x$, we associate the real number $y=x^2+1$). The abstract definition has many advantages and covers more situations, for example, we will see that a sequence can be seen as a function (from a set of integers $\mathbb{Z}_{n\geq 0}$ to the set of real numbers $\mathbb{R}$).
 
 \section{Notations}
 
 (tbc)
 
-Sometimes, by abuse of notation,\sidenote{Sometimes it means ``The author is tired.''}
+Sometimes, by abuse of notation,\sidenote{Sometimes it just means ``The author is tired.''}
 
 \begin{example}
 The Möbius function $\mu:\mathbb{Z}_{>0}\to\{-1,0,1\}$ is defined depending on the factorization of a positive integer into prime factors. For any positive integer $n>0$, the value of $\mu(n)$ is defined in the following way:
@@ -450,20 +886,169 @@ The Möbius function $\mu$ has an alternative definition in terms of roots of un
 
 \section{Story time: ``Je le vois, mais je ne crois pas''}
 
-\section{Development: Bendixon-Bernstein-Borel-Cantor-Dedekind-Schröder-Zermelo theorem}
 
-\blindtext
+
+
+
+
+
+
+
+
+
+
+
 
 \chapter{Limits and continuity of functions}
 
-\section{Bolzano's theorem}
+\section{Limit of a function}
 
-\blindtext
+\section{Continuous functions}
+
+\section{Bolzano's theorem}
 
 \section{Story time: the origins of rigorous Calculus}
 Stories of this type are best summerized in \href{https://www.smbc-comics.com/comic/how-math-works}{SMBC}.\sidenote{SMBC=Saturday Morning Breakfast Cereal. Similar comics: \href{https://xkcd.com}{xkcd}, \href{http://phdcomics.com}{phdcomics}, \href{https://abstrusegoose.com}{abstruse goose}.}
 
-\section{Development: uniform continuity}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\pagelayout{wide} % No margins
+\addpart{[Week IV]\\What are\dots sequences?}
+\pagelayout{margin} % Restore margins
+
+\chapter{Sequences: definitions and properties}
+
+\section{Classical sequences}
+
+\section{Limit of a sequence}
+
+\section{Monotone convergence theorem}
+
+\section{Squeeze theorem}
+
+\section{The extended real line}
+
+\section{Indeterminate forms}
+
+\section{Development: Bolzano-Weierstrass theorem}
+
+\section{Exercices}
+\begin{exer}
+Determine the limits of the following sequence:
+\begin{enumerate}
+	\item (tbc)
+	\item (tbc)
+	\item (tbc)
+\end{enumerate}
+
+To get familiar with the $(\epsilon,\delta)$-formalism, you can try to prove your results.
+\end{exer}
+
+\begin{exer}
+(tbc)
+\end{exer}
+
+\begin{exer}
+Use the $(\epsilon,\delta)$-definition to show that if $\{a_n\}_{n\geq 0}$ is a convergent real sequence if and only if $\{|a_n|\}_{n\geq 0}$ is a convergent real sequence.
+
+Do this exercice again by applying the squeeze theorem. Can you find yet another way to do this exercice?
+\end{exer}
+
+\begin{exer}[$\ast$]
+Let $\{a_n\}_{n\geq 0}$ be a real sequence such that
+\begin{enumerate}
+	\item For all $n>0$, $a_n\geq 0$;
+	\item $\lim\limits_{n\to\infty}a_n=0$;
+	\item For all $n>0$,
+	\begin{equation*}
+	a_{n-1}+a_{n+1}-2a_n\geq 0.
+	\end{equation*}
+\end{enumerate}
+Show that $\lim\limits_{n\to\infty}n(a_n-a_{n+1})=0$.
+\end{exer}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \pagelayout{wide} % No margins
 \addpart{[Week V\&VI]\\What are\dots derivatives?}
@@ -483,7 +1068,15 @@ Stories of this type are best summerized in \href{https://www.smbc-comics.com/co
 
 \blindtext
 
+\section{Derivable functions}
+
+\section{Calculation of limits}
+
+\section{Operations (with proofs)}
+
 \section{Rolle's theorem}
+
+\section{Inverse function theorem}
 
 \section{Story time: the Weierstrass function}
 
@@ -500,12 +1093,16 @@ Stories of this type are best summerized in \href{https://www.smbc-comics.com/co
 \section{Development: Sterling's formula}
 
 \pagelayout{wide} % No margins
-\addpart{[Week VII\&Beyond]\\Elementary functions and inequalities}
+\addpart{[Week VII]\\Elementary functions and inequalities}
 \pagelayout{margin} % Restore margins
 
 \chapter{Exponential function}
 
 \chapter{Logarithm}
+It is better to remember that
+\begin{equation*}
+\ln'|x|=\frac{1}{x},\quad\forall x\neq 0.
+\end{equation*}
 
 \chapter{Trigonometric functions}
 
@@ -514,6 +1111,16 @@ Stories of this type are best summerized in \href{https://www.smbc-comics.com/co
 \chapter{Polynomials}
 
 \chapter{Some classical inequalities}
+
+\section{Cauchy-Schwarz inequality}
+
+\section{Hölder inequality}
+
+\section{Jensen inequality}
+
+\section{Minkowski inequality}
+
+\section{Sub-additive inequality}
 
 \appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
 
@@ -527,6 +1134,12 @@ Stories of this type are best summerized in \href{https://www.smbc-comics.com/co
 \section{Root of unity}\label{Extra:RootUnity}
 
 \section{Constant-recursive sequence}\label{Extra:RecursiveSequence}
+
+\section{Cauchy sequence}
+
+\section{Weierstrass' function}
+
+\section{Darboux's theorem}
 
 \dots
 
